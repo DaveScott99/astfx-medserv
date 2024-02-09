@@ -11,14 +11,9 @@ spring:
   jmx:
     enable: false
   datasource:
-    url: jdbc:mysql://192.168.1.150:3306/PROTO_MEDIA?allowPublicKeyRetrieval=true&sslMode=DISABLED
-    username: dba-root
+    url: jdbc:mysql://astfx-media-db.cdokmg248px7.sa-east-1.rds.amazonaws.com:3306/astfx_media_db?allowPublicKeyRetrieval=true&sslMode=DISABLED
+    username: dba_root_media
     password: nUKXQ3C35F2Kcq4_
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: admin
-    password: 123456
 
 server:
   port: 8763
@@ -28,4 +23,4 @@ eureka:
     preferIpAddress: true
   client:
     service-url:
-      defaultZone: http://discovery-service:8761/eureka/
+      defaultZone: http://ec2-52-67-63-144.sa-east-1.compute.amazonaws.com:8761/eureka/
