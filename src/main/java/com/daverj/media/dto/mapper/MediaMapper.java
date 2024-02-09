@@ -1,6 +1,7 @@
 package com.daverj.media.dto.mapper;
 
 import com.daverj.media.dto.request.MediaCreateDTO;
+import com.daverj.media.dto.request.MediaUpdateDTO;
 import com.daverj.media.dto.response.MediaDTO;
 import com.daverj.media.model.Movie;
 import com.daverj.media.model.TvShow;
@@ -66,6 +67,24 @@ public class MediaMapper {
         entity.setYear(mediaDTO.getYear());
         entity.setTrailer(mediaDTO.getTrailer());
         mediaDTO.getGenres().forEach(x -> entity.getGenres().add(x));
+
+        return entity;
+
+    }
+
+    public Movie toMovieEntityPatch(MediaUpdateDTO dto) {
+
+        if (dto == null)
+            return null;
+
+        Movie entity = new Movie();
+
+        entity.setTitle(dto.getTitle());
+        entity.setBackdrop(dto.getBackdrop());
+        entity.setCover(dto.getCover());
+        entity.setLogo(dto.getLogo());
+        entity.setLongDescription(dto.getLongDescription());
+        entity.setShortDescription(dto.getShortDescription());
 
         return entity;
 
