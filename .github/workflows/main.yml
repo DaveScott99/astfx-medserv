@@ -34,9 +34,8 @@ jobs:
     - name: Build Docker image
       run: docker build -t ${{ secrets.DOCKER_USER }}/astfx-medserv .
 
-    - name: Push image Docker with version tag
-      run: docker push ${{ secrets.DOCKER_USER }}/astfx-medserv:${{ github.run_number }}.${{ steps.commit_hash.outputs.hash }}
-
     - name: Push image Docker with latest tag 
       run: docker push ${{ secrets.DOCKER_USER }}/astfx-medserv:latest
-        
+
+    - name: Push image Docker with version tag
+      run: docker push ${{ secrets.DOCKER_USER }}/astfx-medserv:${{ steps.commit_hash.outputs.hash }}
