@@ -21,7 +21,11 @@ jobs:
     - name: Get short commit hash
       id: commit_hash
       run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
-
+      
+    - name: Echo version
+      run: |
+          echo Version is ${{ vars.VERSION }}.${{ github.run_number }}
+          
     - name: Build project
       run: mvn clean install -DskipTests
           
@@ -32,10 +36,10 @@ jobs:
         password: ${{secrets.DOCKER_PWD}}
 
     - name: Build Docker image
-      run: docker build -t ${{ secrets.DOCKER_USER }}/astfx-medserv .
+      run: docker build -t ${{ secrets.DOCKER_USER }}/astfx-medserv:v${{ vars.VERSION }}.${{ github.run_number }}.${{ steps.commit_hash.outputs.hash }}
 
     - name: Push image Docker with latest tag 
       run: docker push ${{ secrets.DOCKER_USER }}/astfx-medserv:latest
 
     - name: Push image Docker with version tag
-      run: docker push ${{ secrets.DOCKER_USER }}/astfx-medserv:${{ steps.commit_hash.outputs.hash }}
+      run: docker push ${{ secrets.DOCKER_USER }}/astfx-medserv:v${{ vars.VERSION }}.${{ github.run_number }}.${{ steps.commit_hash.outputs.hash }}
