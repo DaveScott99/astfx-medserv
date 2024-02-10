@@ -1,6 +1,7 @@
 package com.daverj.media.dto.mapper;
 
 import com.daverj.media.dto.request.EpisodeCreateDTO;
+import com.daverj.media.dto.request.EpisodeUpdateDTO;
 import com.daverj.media.dto.response.EpisodeDTO;
 import com.daverj.media.model.Episode;
 import org.springframework.stereotype.Component;
@@ -27,6 +28,20 @@ public class EpisodeMapper {
         entity.setDuration(dto.getDuration());
         entity.setBackdrop(dto.getBackdrop());
         entity.setSeason(dto.getSeason());
+
+        return entity;
+    }
+
+    public Episode toEntityPatch (EpisodeUpdateDTO dto) {
+
+        if (dto == null)
+            return null;
+
+        Episode entity = new Episode();
+
+        entity.setTitle(dto.getTitle());
+        entity.setDescription(dto.getDescription());
+        entity.setBackdrop(dto.getBackdrop());
 
         return entity;
     }
