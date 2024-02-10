@@ -18,10 +18,6 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Get short commit hash
-      id: commit_hash
-      run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
-
     - name: Build project
       run: mvn clean install -DskipTests
           
@@ -35,7 +31,7 @@ jobs:
       run: docker build -t ${{ secrets.DOCKER_USER }}/astfx-medserv .
 
     - name: Push image Docker with version tag
-      run: docker push ${{ secrets.DOCKER_USER }}/astfx-medserv:v${{ github.run_number }}.${{ steps.commit_hash.outputs.hash }}
+      run: docker push ${{ secrets.DOCKER_USER }}/astfx-medserv:v${{ github.run_number }}
 
     - name: Push image Docker with latest tag 
       run: docker push ${{ secrets.DOCKER_USER }}/astfx-medserv:latest
