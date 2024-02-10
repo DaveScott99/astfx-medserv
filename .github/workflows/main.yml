@@ -31,14 +31,14 @@ jobs:
         username: ${{secrets.DOCKER_USER}}
         password: ${{secrets.DOCKER_PWD}}
 
-    - name: Build Docker image latest tag
-      run: docker build -t ${{ secrets.DOCKER_USER }}/astfx-medserv:latest .
-
     - name: Build Docker image version tag
       run: docker build -t ${{ secrets.DOCKER_USER }}/astfx-medserv:v1.${{ github.run_number }}.${{ steps.commit_hash.outputs.hash }} .
 
-    - name: Push image Docker with latest tag 
-      run: docker push ${{ secrets.DOCKER_USER }}/astfx-medserv:latest
+    - name: Build Docker image latest tag
+      run: docker build -t ${{ secrets.DOCKER_USER }}/astfx-medserv:latest .
 
     - name: Push image Docker with version tag
       run: docker push ${{ secrets.DOCKER_USER }}/astfx-medserv:v1.${{ github.run_number }}.${{ steps.commit_hash.outputs.hash }}
+
+    - name: Push image Docker with latest tag 
+      run: docker push ${{ secrets.DOCKER_USER }}/astfx-medserv:latest
