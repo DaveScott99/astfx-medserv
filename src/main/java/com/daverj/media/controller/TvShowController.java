@@ -1,6 +1,7 @@
 package com.daverj.media.controller;
 
 import com.daverj.media.dto.request.MediaCreateDTO;
+import com.daverj.media.dto.request.MediaUpdateDTO;
 import com.daverj.media.dto.response.MediaDTO;
 import com.daverj.media.dto.response.TvShowDTO;
 import com.daverj.media.service.TvShowService;
@@ -13,6 +14,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 
 
 @RestController
@@ -28,6 +32,12 @@ public class TvShowController {
         return new ResponseEntity<>(tvShowService.list(pageable), HttpStatus.OK);
     }
 
+    @GetMapping("/find")
+    public ResponseEntity<MediaDTO> findByTitle(@RequestParam String title) {
+        String titleDecoded = URLDecoder.decode(title, StandardCharsets.UTF_8);
+        return ResponseEntity.ok().body(tvShowService.findByTitle(title));
+    }
+
     @GetMapping
     public ResponseEntity<TvShowDTO> findById(@RequestParam Long id) {
         return ResponseEntity.ok(tvShowService.findById(id));
@@ -36,5 +46,15 @@ public class TvShowController {
     @PostMapping
     public ResponseEntity<MediaDTO> create(@RequestBody MediaCreateDTO tvShow) {
         return new ResponseEntity<>(tvShowService.create(tvShow), HttpStatus.CREATED);
+    }
+
+    @PatchMapping
+    public ResponseEntity<MediaDTO> update(@RequestParam Long id, @RequestBody MediaUpdateDTO dto) {
+        return new ResponseEntity<>(tvShowService.update(id, dto), HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> delete(@RequestParam Long id) {
+        return ResponseEntity.ok(tvShowService.delete(id));
     }
 }

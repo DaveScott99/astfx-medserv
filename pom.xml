@@ -12,7 +12,7 @@
 
 	<groupId>com.daverj</groupId>
 	<artifactId>media</artifactId>
-	<version>1.1-b</version>
+	<version>1.1-c</version>
 	<name>astfx-media-service</name>
 	<description>Astroflix media's Service</description>
 

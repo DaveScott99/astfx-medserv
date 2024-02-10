@@ -90,4 +90,22 @@ public class MediaMapper {
 
     }
 
+    public TvShow toTvShowEntityPatch(MediaUpdateDTO dto) {
+
+        if (dto == null)
+            return null;
+
+        TvShow entity = new TvShow();
+
+        entity.setTitle(dto.getTitle());
+        entity.setBackdrop(dto.getBackdrop());
+        entity.setCover(dto.getCover());
+        entity.setLogo(dto.getLogo());
+        entity.setLongDescription(dto.getLongDescription());
+        entity.setShortDescription(dto.getShortDescription());
+
+        return entity;
+
+    }
+
 }
