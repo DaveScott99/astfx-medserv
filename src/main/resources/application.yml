@@ -22,5 +22,12 @@ eureka:
   instance:
     preferIpAddress: true
   client:
+    registerWithEureka: true
+    fetchRegistry: true
     service-url:
       defaultZone: http://discovery-service:8761/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 40000
+
+cors:
+  origins: ${CORS_ORIGINS:http://localhost:3000}

@@ -15,7 +15,7 @@ import java.util.Set;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class SeasonDTO {
 
-    @EqualsAndHashCode.Exclude
+    @EqualsAndHashCode.Include
     private Long id;
     private Set<EpisodeDTO> episodes = new HashSet<>();
 
