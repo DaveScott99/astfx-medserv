@@ -50,10 +50,10 @@ public class MovieService {
         if (entity != null) {
             if (newMovie.getTitle() != null && !newMovie.getTitle().equals(entity.getTitle())) entity.setTitle(newMovie.getTitle());
             if (newMovie.getBackdrop() != null && !newMovie.getBackdrop().equals(entity.getBackdrop())) entity.setBackdrop(newMovie.getBackdrop());
-            if (newMovie.getCover() != null && !newMovie.getCover().equals(entity.getCover())) entity.setCover(newMovie.getCover());
+            if (newMovie.getPoster() != null && !newMovie.getPoster().equals(entity.getPoster())) entity.setPoster(newMovie.getPoster());
             if (newMovie.getLogo() != null && !newMovie.getLogo().equals(entity.getLogo())) entity.setLogo(newMovie.getLogo());
-            if (newMovie.getLongDescription() != null && !newMovie.getLongDescription().equals(entity.getLongDescription())) entity.setLongDescription(newMovie.getLongDescription());
-            if (newMovie.getShortDescription() != null && !newMovie.getShortDescription().equals(entity.getShortDescription())) entity.setShortDescription(newMovie.getShortDescription());
+            if (newMovie.getOverview() != null && !newMovie.getOverview().equals(entity.getOverview())) entity.setOverview(newMovie.getOverview());
+            if (newMovie.getDescription() != null && !newMovie.getDescription().equals(entity.getDescription())) entity.setDescription(newMovie.getDescription());
 
             return mediaMapper.toMovieDTO(movieRepository.save(entity));
         }

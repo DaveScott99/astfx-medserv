@@ -33,7 +33,7 @@ public class Media {
     private String trailer;
 
     @Column(nullable = false)
-    private String cover;
+    private String poster;
 
     @Column(nullable = false)
     private String logo;
@@ -42,22 +42,25 @@ public class Media {
     private String backdrop;
 
     @Column(nullable = false)
-    private String duration;
+    private String runtime;
 
     @Column(nullable = false, length = 512)
-    private String longDescription;
+    private String overview;
 
     @Column(nullable = false)
-    private String shortDescription;
+    private String description;
 
     @Column(nullable = false)
-    private String country;
-
-    @Column(nullable = false)
-    private Integer year;
+    private Integer releaseYear;
 
     @CreationTimestamp
     private Instant createdAt;
+
+    private boolean isActive;
+
+    private Integer rating;
+
+    private String sourceFolder;
 
     @ManyToMany
     @JoinTable(name = "media_genre",

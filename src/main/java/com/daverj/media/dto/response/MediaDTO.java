@@ -18,20 +18,20 @@ public class MediaDTO {
     private Long id;
     private String title;
     private String trailerUrl;
-    private String cover;
+    private String poster;
     private String logo;
-    private String longDescription;
-    private Integer year;
+    private String overview;
+    private Integer releaseYear;
     private Set<GenreDTO> genres = new HashSet<>();
 
     public MediaDTO(Media media) {
         id = media.getId();
         title = media.getTitle();
         trailerUrl = media.getTrailer();
-        cover = media.getCover();
+        poster = media.getPoster();
         logo = media.getLogo();
-        longDescription = media.getLongDescription();
-        year = media.getYear();
+        overview = media.getOverview();
+        releaseYear = media.getReleaseYear();
         media.getGenres().forEach(genre -> getGenres().add(new GenreDTO(genre)));
     }
 
@@ -39,10 +39,10 @@ public class MediaDTO {
         id = tvShow.getId();
         title = tvShow.getTitle();
         trailerUrl = tvShow.getTrailer();
-        cover = tvShow.getCover();
+        poster = tvShow.getPoster();
         logo = tvShow.getLogo();
-        longDescription = tvShow.getLongDescription();
-        year = tvShow.getYear();
+        overview = tvShow.getOverview();
+        releaseYear = tvShow.getReleaseYear();
         tvShow.getGenres().forEach(genre -> getGenres().add(new GenreDTO(genre)));
     }
 
@@ -50,10 +50,10 @@ public class MediaDTO {
         id = movie.getId();
         title = movie.getTitle();
         trailerUrl = movie.getTrailer();
-        cover = movie.getCover();
+        poster = movie.getPoster();
         logo = movie.getLogo();
-        longDescription = movie.getLongDescription();
-        year = movie.getYear();
+        overview = movie.getOverview();
+        releaseYear = movie.getReleaseYear();
         movie.getGenres().forEach(genre -> getGenres().add(new GenreDTO(genre)));
     }
 }

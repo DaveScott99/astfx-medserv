@@ -35,12 +35,11 @@ public class MediaMapper {
         entity.setTitle(mediaDTO.getTitle());
         entity.setBackdrop(mediaDTO.getBackdrop());
         entity.setLogo(mediaDTO.getLogo());
-        entity.setCover(mediaDTO.getCover());
-        entity.setCountry(mediaDTO.getCountry());
-        entity.setLongDescription(mediaDTO.getLongDescription());
-        entity.setShortDescription(mediaDTO.getShortDescription());
-        entity.setDuration(mediaDTO.getDuration());
-        entity.setYear(mediaDTO.getYear());
+        entity.setPoster(mediaDTO.getPoster());
+        entity.setOverview(mediaDTO.getOverview());
+        entity.setDescription(mediaDTO.getDescription());
+        entity.setRuntime(mediaDTO.getRuntime());
+        entity.setReleaseYear(mediaDTO.getReleaseYear());
         entity.setTrailer(mediaDTO.getTrailer());
         mediaDTO.getGenres().forEach(x -> entity.getGenres().add(x));
 
@@ -59,12 +58,11 @@ public class MediaMapper {
         entity.setTitle(mediaDTO.getTitle());
         entity.setBackdrop(mediaDTO.getBackdrop());
         entity.setLogo(mediaDTO.getLogo());
-        entity.setCover(mediaDTO.getCover());
-        entity.setCountry(mediaDTO.getCountry());
-        entity.setLongDescription(mediaDTO.getLongDescription());
-        entity.setShortDescription(mediaDTO.getShortDescription());
-        entity.setDuration(mediaDTO.getDuration());
-        entity.setYear(mediaDTO.getYear());
+        entity.setPoster(mediaDTO.getPoster());
+        entity.setOverview(mediaDTO.getOverview());
+        entity.setDescription(mediaDTO.getDescription());
+        entity.setRuntime(mediaDTO.getRuntime());
+        entity.setReleaseYear(mediaDTO.getReleaseYear());
         entity.setTrailer(mediaDTO.getTrailer());
         mediaDTO.getGenres().forEach(x -> entity.getGenres().add(x));
 
@@ -81,10 +79,10 @@ public class MediaMapper {
 
         entity.setTitle(dto.getTitle());
         entity.setBackdrop(dto.getBackdrop());
-        entity.setCover(dto.getCover());
+        entity.setPoster(dto.getPoster());
         entity.setLogo(dto.getLogo());
-        entity.setLongDescription(dto.getLongDescription());
-        entity.setShortDescription(dto.getShortDescription());
+        entity.setOverview(dto.getOverview());
+        entity.setDescription(dto.getDescription());
 
         return entity;
 
@@ -99,10 +97,10 @@ public class MediaMapper {
 
         entity.setTitle(dto.getTitle());
         entity.setBackdrop(dto.getBackdrop());
-        entity.setCover(dto.getCover());
+        entity.setPoster(dto.getPoster());
         entity.setLogo(dto.getLogo());
-        entity.setLongDescription(dto.getLongDescription());
-        entity.setShortDescription(dto.getShortDescription());
+        entity.setOverview(dto.getOverview());
+        entity.setDescription(dto.getDescription());
 
         return entity;
 

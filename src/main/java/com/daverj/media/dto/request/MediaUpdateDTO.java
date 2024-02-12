@@ -19,7 +19,7 @@ public class MediaUpdateDTO {
 
     @NotBlank(message = "The field 'cover' is mandatory")
     @JsonProperty(value = "cover")
-    private String cover;
+    private String poster;
 
     @NotBlank(message = "The field 'logo' is mandatory")
     @JsonProperty(value = "logo")
@@ -29,12 +29,12 @@ public class MediaUpdateDTO {
     @JsonProperty(value = "backdrop")
     private String backdrop;
 
-    @NotBlank(message = "The field 'longDescription' is mandatory")
-    @JsonProperty(value = "longDescription")
-    private String longDescription;
+    @NotBlank(message = "The field 'overview' is mandatory")
+    @JsonProperty(value = "overview")
+    private String overview;
 
-    @NotBlank(message = "The field 'shortDescription' is mandatory")
-    @JsonProperty(value = "shortDescription")
-    private String shortDescription;
+    @NotBlank(message = "The field 'description' is mandatory")
+    @JsonProperty(value = "description")
+    private String description;
 
 }

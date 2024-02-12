@@ -20,8 +20,8 @@ public class TvShowDTO {
     private String trailer;
     private String logo;
     private String backdrop;
-    private String longDescription;
-    private Integer year;
+    private String overview;
+    private Integer releaseYear;
     private Set<GenreDTO> genres = new HashSet<>();
     private List<SeasonDTO> seasons = new ArrayList<>();
 
@@ -30,8 +30,8 @@ public class TvShowDTO {
         title = tvShow.getTitle();
         trailer = tvShow.getTrailer();
         logo = tvShow.getLogo();
-        longDescription = tvShow.getLongDescription();
-        year = tvShow.getYear();
+        overview = tvShow.getOverview();
+        releaseYear = tvShow.getReleaseYear();
         tvShow.getGenres().forEach(genre -> getGenres().add(new GenreDTO(genre)));
         tvShow.getSeasons().forEach(season -> getSeasons().add(new SeasonDTO(season)));
     }

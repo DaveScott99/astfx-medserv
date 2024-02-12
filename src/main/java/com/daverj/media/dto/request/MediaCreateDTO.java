@@ -7,10 +7,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.*;
 
 import jakarta.validation.constraints.NotBlank;
-import java.util.Set;
 
-@JsonPropertyOrder(value = {"id", "title", "trailer", "cover", "logo", "duration", "longDescription", "shortDescription",
-         "country", "year", "genres", "backdrop"})
+import java.util.List;
+
+@JsonPropertyOrder(value = {"id", "title", "trailer", "poster", "logo", "runtime", "overview", "description",
+        "releaseYear", "genres", "poster"})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -28,9 +29,9 @@ public class MediaCreateDTO {
     @JsonProperty(value = "trailer")
     private String trailer;
 
-    @NotBlank(message = "The field 'cover' is mandatory")
-    @JsonProperty(value = "cover")
-    private String cover;
+    @NotBlank(message = "The field 'poster' is mandatory")
+    @JsonProperty(value = "poster")
+    private String poster;
 
     @NotBlank(message = "The field 'logo' is mandatory")
     @JsonProperty(value = "logo")
@@ -40,41 +41,36 @@ public class MediaCreateDTO {
     @JsonProperty(value = "backdrop")
     private String backdrop;
 
-    @NotBlank(message = "The field 'duration' is mandatory")
-    @JsonProperty(value = "duration")
-    private String duration;
+    @NotBlank(message = "The field 'runtime' is mandatory")
+    @JsonProperty(value = "runtime")
+    private String runtime;
 
-    @NotBlank(message = "The field 'longDescription' is mandatory")
-    @JsonProperty(value = "longDescription")
-    private String longDescription;
+    @NotBlank(message = "The field 'overview' is mandatory")
+    @JsonProperty(value = "overview")
+    private String overview;
 
-    @NotBlank(message = "The field 'shortDescription' is mandatory")
-    @JsonProperty(value = "shortDescription")
-    private String shortDescription;
+    @NotBlank(message = "The field 'description' is mandatory")
+    @JsonProperty(value = "description")
+    private String description;
 
-    @NotBlank(message = "The field 'country' is mandatory")
-    @JsonProperty(value = "country")
-    private String country;
-
-    @NotBlank(message = "The field 'year' is mandatory")
-    @JsonProperty(value = "year")
-    private Integer year;
+    @NotBlank(message = "The field 'releaseYear' is mandatory")
+    @JsonProperty(value = "releaseYear")
+    private Integer releaseYear;
 
     @NotBlank(message = "The field 'genres' is mandatory")
     @JsonProperty(value = "genres")
-    private Set<Genre> genres;
+    private List<Genre> genres;
 
     public MediaCreateDTO(Media media) {
         id = media.getId();
         title = media.getTitle();
         trailer = media.getTrailer();
-        cover = media.getCover();
+        poster = media.getPoster();
         logo = media.getLogo();
-        duration = media.getDuration();
-        longDescription = media.getLongDescription();
-        shortDescription = media.getShortDescription();
-        country = media.getCountry();
-        year = media.getYear();
+        runtime = media.getRuntime();
+        overview = media.getOverview();
+        description = media.getDescription();
+        releaseYear = media.getReleaseYear();
         media.getGenres().forEach(genre -> genres.add(genre));
     }
 

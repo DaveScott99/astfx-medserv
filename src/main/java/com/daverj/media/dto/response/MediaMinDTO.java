@@ -14,27 +14,27 @@ public class MediaMinDTO {
 
     private Long id;
     private String title;
-    private String cover;
+    private String poster;
     private String logo;
 
     public MediaMinDTO(Media media) {
         id = media.getId();
         title = media.getTitle();
-        cover = media.getCover();
+        poster = media.getPoster();
         logo = media.getLogo();
     }
 
     public MediaMinDTO(TvShow tvShow) {
         id = tvShow.getId();
         title = tvShow.getTitle();
-        cover = tvShow.getCover();
+        poster = tvShow.getPoster();
         logo = tvShow.getLogo();
     }
 
     public MediaMinDTO(Movie movie) {
         id = movie.getId();
         title = movie.getTitle();
-        cover = movie.getCover();
+        poster = movie.getPoster();
         logo = movie.getLogo();
     }
 }
