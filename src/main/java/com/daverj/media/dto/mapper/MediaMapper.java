@@ -3,6 +3,8 @@ package com.daverj.media.dto.mapper;
 import com.daverj.media.dto.request.MediaCreateDTO;
 import com.daverj.media.dto.request.MediaUpdateDTO;
 import com.daverj.media.dto.response.MediaDTO;
+import com.daverj.media.dto.response.MediaMinDTO;
+import com.daverj.media.model.Media;
 import com.daverj.media.model.Movie;
 import com.daverj.media.model.TvShow;
 import org.springframework.stereotype.Component;
@@ -24,6 +26,13 @@ public class MediaMapper {
         return new MediaDTO(tvShow);
     }
 
+    public MediaMinDTO toMinDTO (Media entity) {
+        if (entity == null)
+            return null;
+        return new MediaMinDTO(entity);
+
+    }
+
     public Movie toMovieEntity(MediaCreateDTO mediaDTO) {
 
         if (mediaDTO == null)
@@ -31,17 +40,13 @@ public class MediaMapper {
 
         Movie entity = new Movie();
 
-        entity.setId(mediaDTO.getId());
+        entity.setIdTMDB(mediaDTO.getIdTMDB());
         entity.setTitle(mediaDTO.getTitle());
-        entity.setBackdrop(mediaDTO.getBackdrop());
-        entity.setLogo(mediaDTO.getLogo());
-        entity.setPoster(mediaDTO.getPoster());
         entity.setOverview(mediaDTO.getOverview());
-        entity.setDescription(mediaDTO.getDescription());
+        entity.setTagline(mediaDTO.getTagline());
         entity.setRuntime(mediaDTO.getRuntime());
         entity.setReleaseYear(mediaDTO.getReleaseYear());
-        entity.setTrailer(mediaDTO.getTrailer());
-        mediaDTO.getGenres().forEach(x -> entity.getGenres().add(x));
+        entity.setAdult((mediaDTO.isAdult()));
 
         return entity;
 
@@ -54,17 +59,12 @@ public class MediaMapper {
 
         TvShow entity = new TvShow();
 
-        entity.setId(mediaDTO.getId());
+        entity.setIdTMDB(mediaDTO.getIdTMDB());
         entity.setTitle(mediaDTO.getTitle());
-        entity.setBackdrop(mediaDTO.getBackdrop());
-        entity.setLogo(mediaDTO.getLogo());
-        entity.setPoster(mediaDTO.getPoster());
         entity.setOverview(mediaDTO.getOverview());
-        entity.setDescription(mediaDTO.getDescription());
         entity.setRuntime(mediaDTO.getRuntime());
         entity.setReleaseYear(mediaDTO.getReleaseYear());
-        entity.setTrailer(mediaDTO.getTrailer());
-        mediaDTO.getGenres().forEach(x -> entity.getGenres().add(x));
+        entity.setAdult(mediaDTO.isAdult());
 
         return entity;
 
@@ -82,7 +82,7 @@ public class MediaMapper {
         entity.setPoster(dto.getPoster());
         entity.setLogo(dto.getLogo());
         entity.setOverview(dto.getOverview());
-        entity.setDescription(dto.getDescription());
+        entity.setTagline(dto.getTagline());
 
         return entity;
 
@@ -100,7 +100,7 @@ public class MediaMapper {
         entity.setPoster(dto.getPoster());
         entity.setLogo(dto.getLogo());
         entity.setOverview(dto.getOverview());
-        entity.setDescription(dto.getDescription());
+        entity.setTagline(dto.getTagline());
 
         return entity;
 

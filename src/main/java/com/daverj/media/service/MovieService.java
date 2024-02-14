@@ -4,6 +4,7 @@ import com.daverj.media.dto.request.MediaCreateDTO;
 import com.daverj.media.dto.request.MediaUpdateDTO;
 import com.daverj.media.dto.response.MediaDTO;
 import com.daverj.media.dto.mapper.MediaMapper;
+import com.daverj.media.dto.response.MediaMinDTO;
 import com.daverj.media.model.Movie;
 import com.daverj.media.repository.MovieRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -53,7 +54,7 @@ public class MovieService {
             if (newMovie.getPoster() != null && !newMovie.getPoster().equals(entity.getPoster())) entity.setPoster(newMovie.getPoster());
             if (newMovie.getLogo() != null && !newMovie.getLogo().equals(entity.getLogo())) entity.setLogo(newMovie.getLogo());
             if (newMovie.getOverview() != null && !newMovie.getOverview().equals(entity.getOverview())) entity.setOverview(newMovie.getOverview());
-            if (newMovie.getDescription() != null && !newMovie.getDescription().equals(entity.getDescription())) entity.setDescription(newMovie.getDescription());
+            if (newMovie.getTagline() != null && !newMovie.getTagline().equals(entity.getTagline())) entity.setTagline(newMovie.getTagline());
 
             return mediaMapper.toMovieDTO(movieRepository.save(entity));
         }
@@ -77,9 +78,8 @@ public class MovieService {
         return "";
     }
 
-    public MediaDTO create(MediaCreateDTO movie) {
-        log.info("Movie created with id " + movie.getId());
-        return mediaMapper.toMovieDTO(movieRepository.save(mediaMapper.toMovieEntity(movie)));
+    public MediaMinDTO create(MediaCreateDTO movie) {
+        return mediaMapper.toMinDTO(movieRepository.save(mediaMapper.toMovieEntity(movie)));
     }
 
 }

@@ -35,6 +35,6 @@ public class MediaUpdateDTO {
 
     @NotBlank(message = "The field 'description' is mandatory")
     @JsonProperty(value = "description")
-    private String description;
+    private String tagline;
 
 }

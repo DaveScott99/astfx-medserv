@@ -27,18 +27,17 @@ public class Media {
     private Long id;
 
     @Column(nullable = false)
+    private Long idTMDB;
+
+    @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
     private String trailer;
 
-    @Column(nullable = false)
     private String poster;
 
-    @Column(nullable = false)
     private String logo;
 
-    @Column(nullable = false)
     private String backdrop;
 
     @Column(nullable = false)
@@ -48,7 +47,7 @@ public class Media {
     private String overview;
 
     @Column(nullable = false)
-    private String description;
+    private String tagline;
 
     @Column(nullable = false)
     private Integer releaseYear;
@@ -56,7 +55,10 @@ public class Media {
     @CreationTimestamp
     private Instant createdAt;
 
-    private boolean isActive;
+    private boolean isActive = true;
+
+    @Column(nullable = false)
+    private boolean isAdult;
 
     private Integer rating;
 
@@ -66,7 +68,6 @@ public class Media {
     @JoinTable(name = "media_genre",
             joinColumns = @JoinColumn(name = "media_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
-    @NotNull(message = "The field 'genres' is mandatory")
     private Set<Genre> genres = new HashSet<>();
 
 }

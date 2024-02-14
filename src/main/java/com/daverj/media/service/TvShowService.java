@@ -49,15 +49,15 @@ public class TvShowService {
         TvShow entity = tvShowRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Tv Show not found"));
 
-        TvShow newMovie = mediaMapper.toTvShowEntityPatch(mediaDTO);
+        TvShow newTvShow = mediaMapper.toTvShowEntityPatch(mediaDTO);
 
         if (entity != null) {
-            if (newMovie.getTitle() != null && !newMovie.getTitle().equals(entity.getTitle())) entity.setTitle(newMovie.getTitle());
-            if (newMovie.getBackdrop() != null && !newMovie.getBackdrop().equals(entity.getBackdrop())) entity.setBackdrop(newMovie.getBackdrop());
-            if (newMovie.getCover() != null && !newMovie.getCover().equals(entity.getCover())) entity.setCover(newMovie.getCover());
-            if (newMovie.getLogo() != null && !newMovie.getLogo().equals(entity.getLogo())) entity.setLogo(newMovie.getLogo());
-            if (newMovie.getLongDescription() != null && !newMovie.getLongDescription().equals(entity.getLongDescription())) entity.setLongDescription(newMovie.getLongDescription());
-            if (newMovie.getShortDescription() != null && !newMovie.getShortDescription().equals(entity.getShortDescription())) entity.setShortDescription(newMovie.getShortDescription());
+            if (newTvShow.getTitle() != null && !newTvShow.getTitle().equals(entity.getTitle())) entity.setTitle(newTvShow.getTitle());
+            if (newTvShow.getBackdrop() != null && !newTvShow.getBackdrop().equals(entity.getBackdrop())) entity.setBackdrop(newTvShow.getBackdrop());
+            if (newTvShow.getPoster() != null && !newTvShow.getPoster().equals(entity.getPoster())) entity.setPoster(newTvShow.getPoster());
+            if (newTvShow.getLogo() != null && !newTvShow.getLogo().equals(entity.getLogo())) entity.setLogo(newTvShow.getLogo());
+            if (newTvShow.getOverview() != null && !newTvShow.getOverview().equals(entity.getOverview())) entity.setOverview(newTvShow.getOverview());
+            if (newTvShow.getTagline() != null && !newTvShow.getTagline().equals(entity.getTagline())) entity.setTagline(newTvShow.getTagline());
 
             return mediaMapper.toTvShowDTO(tvShowRepository.save(entity));
         }
@@ -83,7 +83,6 @@ public class TvShowService {
 
 
     public MediaDTO create(MediaCreateDTO tvShow) {
-        log.info("Creating an Tv Show with id " + tvShow.getId());
         return mediaMapper.toTvShowDTO(tvShowRepository.save(mediaMapper.toTvShowEntity(tvShow)));
     }
 

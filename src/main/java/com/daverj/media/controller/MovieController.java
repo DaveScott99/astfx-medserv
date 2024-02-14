@@ -3,6 +3,7 @@ package com.daverj.media.controller;
 import com.daverj.media.dto.request.MediaCreateDTO;
 import com.daverj.media.dto.request.MediaUpdateDTO;
 import com.daverj.media.dto.response.MediaDTO;
+import com.daverj.media.dto.response.MediaMinDTO;
 import com.daverj.media.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +43,7 @@ public class MovieController {
     }
 
     @PostMapping
-    public ResponseEntity<MediaDTO> create(@RequestBody MediaCreateDTO movie) {
+    public ResponseEntity<MediaMinDTO> create(@RequestBody MediaCreateDTO movie) {
         return new ResponseEntity<>(movieService.create(movie), HttpStatus.CREATED);
     }
 
