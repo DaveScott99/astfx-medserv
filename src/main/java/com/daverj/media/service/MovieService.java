@@ -5,7 +5,9 @@ import com.daverj.media.dto.request.MediaUpdateDTO;
 import com.daverj.media.dto.response.MediaDTO;
 import com.daverj.media.dto.mapper.MediaMapper;
 import com.daverj.media.dto.response.MediaMinDTO;
+import com.daverj.media.model.Genre;
 import com.daverj.media.model.Movie;
+import com.daverj.media.repository.GenreRepository;
 import com.daverj.media.repository.MovieRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ public class MovieService {
 
     private final MovieRepository movieRepository;
     private final MediaMapper mediaMapper;
+    private final GenreRepository genreRepository;
 
     public Page<MediaDTO> list(Pageable pageable) {
         log.info("Listing all movies");
@@ -80,6 +83,16 @@ public class MovieService {
 
     public MediaMinDTO create(MediaCreateDTO movie) {
         return mediaMapper.toMinDTO(movieRepository.save(mediaMapper.toMovieEntity(movie)));
+    }
+
+    public MediaDTO addGenre(Long movieId, Genre genre) {
+
+        Movie entity = movieRepository.findById(movieId)
+                .orElseThrow(() -> new EntityNotFoundException("Movie not found"));
+
+        entity.getGenres().add(genre);
+
+        return mediaMapper.toMovieDTO(movieRepository.save(entity));
     }
 
 }

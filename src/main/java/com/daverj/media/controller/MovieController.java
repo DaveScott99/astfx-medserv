@@ -4,6 +4,7 @@ import com.daverj.media.dto.request.MediaCreateDTO;
 import com.daverj.media.dto.request.MediaUpdateDTO;
 import com.daverj.media.dto.response.MediaDTO;
 import com.daverj.media.dto.response.MediaMinDTO;
+import com.daverj.media.model.Genre;
 import com.daverj.media.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -52,6 +53,10 @@ public class MovieController {
         return new ResponseEntity<>(movieService.update(id, dto), HttpStatus.OK);
     }
 
+    @PostMapping("/add/genre")
+    public ResponseEntity<MediaDTO> addGenre(@RequestParam Long mediaId, @RequestBody Genre genre) {
+        return new ResponseEntity<>(movieService.addGenre(mediaId, genre), HttpStatus.OK);
+    }
 
     @DeleteMapping
     public ResponseEntity<String> delete(@RequestParam Long id) {
