@@ -1,5 +1,6 @@
 package com.daverj.media.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import jakarta.persistence.*;
@@ -55,6 +56,9 @@ public class Media {
     @CreationTimestamp
     private Instant createdAt;
 
+    @CreationTimestamp
+    private Instant updatedAt;
+
     private boolean isActive = true;
 
     @Column(nullable = false)
@@ -63,6 +67,18 @@ public class Media {
     private Integer rating;
 
     private String sourceFolder;
+
+    @OneToMany(mappedBy = "media")
+    @JsonIgnore
+    private Set<Art> posters = new HashSet<>();
+
+    @OneToMany(mappedBy = "media")
+    @JsonIgnore
+    private Set<Art> logos = new HashSet<>();
+
+    @OneToMany(mappedBy = "media")
+    @JsonIgnore
+    private Set<Art> backdrops = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "media_genre",

@@ -1,5 +1,6 @@
 package com.daverj.media.dto.response;
 
+import com.daverj.media.model.Art;
 import com.daverj.media.model.Media;
 import com.daverj.media.model.Movie;
 import com.daverj.media.model.TvShow;
@@ -18,42 +19,64 @@ public class MediaDTO {
     private Long id;
     private String title;
     private String trailerUrl;
-    private String poster;
-    private String logo;
     private String overview;
     private Integer releaseYear;
     private Set<GenreDTO> genres = new HashSet<>();
+
+    private ArtDTO logo;
+    private ArtDTO poster;
 
     public MediaDTO(Media media) {
         id = media.getId();
         title = media.getTitle();
         trailerUrl = media.getTrailer();
-        poster = media.getPoster();
-        logo = media.getLogo();
         overview = media.getOverview();
         releaseYear = media.getReleaseYear();
         media.getGenres().forEach(genre -> getGenres().add(new GenreDTO(genre)));
+        logo = new ArtDTO(media.getLogos()
+                .stream()
+                .filter(art -> art.getType().contains("logo"))
+                .filter(Art::isSelected)
+                .findFirst().get());
+        poster = new ArtDTO(media.getLogos()
+                .stream().filter(art -> art.getType().contains("poster"))
+                .filter(Art::isSelected)
+                .findFirst().get());
     }
 
     public MediaDTO(TvShow tvShow) {
         id = tvShow.getId();
         title = tvShow.getTitle();
         trailerUrl = tvShow.getTrailer();
-        poster = tvShow.getPoster();
-        logo = tvShow.getLogo();
         overview = tvShow.getOverview();
         releaseYear = tvShow.getReleaseYear();
         tvShow.getGenres().forEach(genre -> getGenres().add(new GenreDTO(genre)));
+        logo = new ArtDTO(tvShow.getLogos()
+                .stream()
+                .filter(art -> art.getType().contains("logo"))
+                .filter(Art::isSelected)
+                .findFirst().get());
+        poster = new ArtDTO(tvShow.getLogos()
+                .stream().filter(art -> art.getType().contains("poster"))
+                .filter(Art::isSelected)
+                .findFirst().get());
     }
 
     public MediaDTO(Movie movie) {
         id = movie.getId();
         title = movie.getTitle();
         trailerUrl = movie.getTrailer();
-        poster = movie.getPoster();
-        logo = movie.getLogo();
         overview = movie.getOverview();
         releaseYear = movie.getReleaseYear();
         movie.getGenres().forEach(genre -> getGenres().add(new GenreDTO(genre)));
+        logo = new ArtDTO(movie.getLogos()
+                .stream()
+                .filter(art -> art.getType().contains("logo"))
+                .filter(Art::isSelected)
+                .findFirst().get());
+        poster = new ArtDTO(movie.getLogos()
+                    .stream().filter(art -> art.getType().contains("poster"))
+                    .filter(Art::isSelected)
+                    .findFirst().get());
     }
 }
