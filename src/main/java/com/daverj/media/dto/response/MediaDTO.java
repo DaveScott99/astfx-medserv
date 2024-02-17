@@ -6,7 +6,9 @@ import com.daverj.media.model.Movie;
 import com.daverj.media.model.TvShow;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -18,65 +20,44 @@ public class MediaDTO {
 
     private Long id;
     private String title;
-    private String trailerUrl;
-    private String overview;
     private Integer releaseYear;
-    private Set<GenreDTO> genres = new HashSet<>();
-
-    private ArtDTO logo;
+    private List<GenreDTO> genres = new ArrayList<>();
+    private boolean isActive;
     private ArtDTO poster;
 
     public MediaDTO(Media media) {
         id = media.getId();
         title = media.getTitle();
-        trailerUrl = media.getTrailer();
-        overview = media.getOverview();
         releaseYear = media.getReleaseYear();
+        isActive = media.isActive();
         media.getGenres().forEach(genre -> getGenres().add(new GenreDTO(genre)));
-        logo = new ArtDTO(media.getLogos()
-                .stream()
-                .filter(art -> art.getType().contains("logo"))
-                .filter(Art::isSelected)
-                .findFirst().get());
         poster = new ArtDTO(media.getLogos()
                 .stream().filter(art -> art.getType().contains("poster"))
                 .filter(Art::isSelected)
-                .findFirst().get());
+                .findFirst().orElseGet(() -> new Art("Standard logo", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019", "poster")));
     }
 
     public MediaDTO(TvShow tvShow) {
         id = tvShow.getId();
         title = tvShow.getTitle();
-        trailerUrl = tvShow.getTrailer();
-        overview = tvShow.getOverview();
         releaseYear = tvShow.getReleaseYear();
+        isActive = tvShow.isActive();
         tvShow.getGenres().forEach(genre -> getGenres().add(new GenreDTO(genre)));
-        logo = new ArtDTO(tvShow.getLogos()
-                .stream()
-                .filter(art -> art.getType().contains("logo"))
-                .filter(Art::isSelected)
-                .findFirst().get());
         poster = new ArtDTO(tvShow.getLogos()
                 .stream().filter(art -> art.getType().contains("poster"))
                 .filter(Art::isSelected)
-                .findFirst().get());
+                .findFirst().orElseGet(() -> new Art("Standard logo", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019", "poster")));
     }
 
     public MediaDTO(Movie movie) {
         id = movie.getId();
         title = movie.getTitle();
-        trailerUrl = movie.getTrailer();
-        overview = movie.getOverview();
         releaseYear = movie.getReleaseYear();
+        isActive = movie.isActive();
         movie.getGenres().forEach(genre -> getGenres().add(new GenreDTO(genre)));
-        logo = new ArtDTO(movie.getLogos()
-                .stream()
-                .filter(art -> art.getType().contains("logo"))
-                .filter(Art::isSelected)
-                .findFirst().get());
         poster = new ArtDTO(movie.getLogos()
                     .stream().filter(art -> art.getType().contains("poster"))
                     .filter(Art::isSelected)
-                    .findFirst().get());
+                    .findFirst().orElseGet(() -> new Art("Standard logo", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019", "poster")));
     }
 }

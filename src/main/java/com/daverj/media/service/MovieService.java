@@ -17,6 +17,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -85,14 +87,18 @@ public class MovieService {
         return mediaMapper.toMinDTO(movieRepository.save(mediaMapper.toMovieEntity(movie)));
     }
 
-    public MediaDTO addGenre(Long movieId, Genre genre) {
+    public void addGenre(Long movieId, Genre genre) {
 
         Movie entity = movieRepository.findById(movieId)
                 .orElseThrow(() -> new EntityNotFoundException("Movie not found"));
 
+        // Capturar exceção SQLIntegrityConstraintViolationException ao adicionar um genero repetido
+        if (entity.getGenres().contains(genre))
+            throw new RuntimeException("This genre is already added");
+
         entity.getGenres().add(genre);
 
-        return mediaMapper.toMovieDTO(movieRepository.save(entity));
+        mediaMapper.toMovieDTO(movieRepository.save(entity));
     }
 
 }

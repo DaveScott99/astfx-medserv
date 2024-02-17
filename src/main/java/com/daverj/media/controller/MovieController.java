@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 @RestController
 @RequestMapping("/media/movie")
@@ -54,8 +55,9 @@ public class MovieController {
     }
 
     @PostMapping("/add/genre")
-    public ResponseEntity<MediaDTO> addGenre(@RequestParam Long mediaId, @RequestBody Genre genre) {
-        return new ResponseEntity<>(movieService.addGenre(mediaId, genre), HttpStatus.OK);
+    public ResponseEntity<Void> addGenre(@RequestParam Long mediaId, @RequestBody Genre genre) {
+        movieService.addGenre(mediaId, genre);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping

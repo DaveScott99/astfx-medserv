@@ -7,9 +7,10 @@ import com.daverj.media.repository.GenreRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -19,10 +20,13 @@ public class GenreService {
     private final GenreRepository genreRepository;
     private final GenreMapper genreMapper;
 
-    public Iterable<GenreDTO> list(Pageable pageable) {
+    public List<GenreDTO> list() {
         log.info("Listing all genres");
-        return genreRepository.findAll(pageable)
-                .map(genreMapper::toDTO);
+        return genreRepository.findAll()
+                .stream()
+                .map(genreMapper::toDTO)
+                .collect(Collectors.toList());
+
     }
 
     public GenreDTO create(Genre genre) {

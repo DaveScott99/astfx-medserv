@@ -30,4 +30,9 @@ public class Art {
     @JoinColumn(name = "media_id", nullable = false)
     private Media media;
 
+    public Art(String name, String file, String type) {
+        this.name = name;
+        this.file = file;
+        this.type = type;
+    }
 }
