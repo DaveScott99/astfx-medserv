@@ -19,14 +19,17 @@ import java.util.Set;
 public class MediaDTO {
 
     private Long id;
+    private Long idTMBD;
     private String title;
     private Integer releaseYear;
     private List<GenreDTO> genres = new ArrayList<>();
     private boolean isActive;
     private ArtDTO poster;
+    private ArtDTO backdrop;
 
     public MediaDTO(Media media) {
         id = media.getId();
+        idTMBD = media.getIdTMDB();
         title = media.getTitle();
         releaseYear = media.getReleaseYear();
         isActive = media.isActive();
@@ -35,29 +38,9 @@ public class MediaDTO {
                 .stream().filter(art -> art.getType().contains("poster"))
                 .filter(Art::isSelected)
                 .findFirst().orElseGet(() -> new Art("Standard logo", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019", "poster")));
-    }
-
-    public MediaDTO(TvShow tvShow) {
-        id = tvShow.getId();
-        title = tvShow.getTitle();
-        releaseYear = tvShow.getReleaseYear();
-        isActive = tvShow.isActive();
-        tvShow.getGenres().forEach(genre -> getGenres().add(new GenreDTO(genre)));
-        poster = new ArtDTO(tvShow.getLogos()
-                .stream().filter(art -> art.getType().contains("poster"))
+        backdrop = new ArtDTO(media.getBackdrops()
+                .stream().filter(art -> art.getType().contains("backdrop"))
                 .filter(Art::isSelected)
-                .findFirst().orElseGet(() -> new Art("Standard logo", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019", "poster")));
-    }
-
-    public MediaDTO(Movie movie) {
-        id = movie.getId();
-        title = movie.getTitle();
-        releaseYear = movie.getReleaseYear();
-        isActive = movie.isActive();
-        movie.getGenres().forEach(genre -> getGenres().add(new GenreDTO(genre)));
-        poster = new ArtDTO(movie.getLogos()
-                    .stream().filter(art -> art.getType().contains("poster"))
-                    .filter(Art::isSelected)
-                    .findFirst().orElseGet(() -> new Art("Standard logo", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019", "poster")));
+                .findFirst().orElseGet(() -> new Art("Standard backdrop", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019", "backdrop")));
     }
 }

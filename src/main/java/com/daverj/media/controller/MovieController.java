@@ -55,19 +55,27 @@ public class MovieController {
     }
 
     @PostMapping("/add/genre")
-    public ResponseEntity<Void> addGenre(@RequestParam Long mediaId, @RequestBody Genre genre) {
-        movieService.addGenre(mediaId, genre);
+    public ResponseEntity<Void> addGenre(@RequestParam Long mediaId, @RequestParam Long genreId) {
+        movieService.addGenre(mediaId, genreId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/remove/genre")
-    public ResponseEntity<Void> removeGenre(@RequestParam Long mediaId, @RequestBody Genre genre) {
-        movieService.removeGenre(mediaId, genre);
+    public ResponseEntity<Void> removeGenre(@RequestParam Long mediaId, @RequestParam Long genreId) {
+        movieService.removeGenre(mediaId, genreId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public ResponseEntity<String> delete(@RequestParam Long id) {
-        return ResponseEntity.ok(movieService.delete(id));
+    @PatchMapping("/active")
+    public ResponseEntity<Void> active(@RequestParam Long id) {
+        movieService.active(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PatchMapping("/disable")
+    public ResponseEntity<Void> disable(@RequestParam Long id) {
+        movieService.disable(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

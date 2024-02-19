@@ -12,18 +12,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class MediaMapper {
 
-    public MediaDTO toMovieDTO(Movie movie) {
-        if (movie == null)
+    public MediaDTO toDTO(Media media) {
+        if (media == null)
             return null;
 
-        return new MediaDTO(movie);
-    }
-
-    public MediaDTO toTvShowDTO(TvShow tvShow) {
-        if (tvShow == null)
-            return null;
-
-        return new MediaDTO(tvShow);
+        return new MediaDTO(media);
     }
 
     public MediaMinDTO toMinDTO (Media entity) {
@@ -33,42 +26,25 @@ public class MediaMapper {
 
     }
 
-    public Movie toMovieEntity(MediaCreateDTO mediaDTO) {
+    public Media toEntity(MediaCreateDTO mediaCreate) {
 
-        if (mediaDTO == null)
+        if (mediaCreate == null)
             return null;
 
-        Movie entity = new Movie();
+        Media entity = new Media();
 
-        entity.setIdTMDB(mediaDTO.getIdTMDB());
-        entity.setTitle(mediaDTO.getTitle());
-        entity.setOverview(mediaDTO.getOverview());
-        entity.setTagline(mediaDTO.getTagline());
-        entity.setRuntime(mediaDTO.getRuntime());
-        entity.setReleaseYear(mediaDTO.getReleaseYear());
-        entity.setAdult((mediaDTO.isAdult()));
+        entity.setIdTMDB(mediaCreate.getIdTMDB());
+        entity.setTitle(mediaCreate.getTitle());
+        entity.setOverview(mediaCreate.getOverview());
+        entity.setTagline(mediaCreate.getTagline());
+        entity.setRuntime(mediaCreate.getRuntime());
+        entity.setReleaseYear(mediaCreate.getReleaseYear());
+        entity.setAdult((mediaCreate.isAdult()));
 
         return entity;
 
     }
 
-    public TvShow toTvShowEntity(MediaCreateDTO mediaDTO) {
-
-        if (mediaDTO == null)
-            return null;
-
-        TvShow entity = new TvShow();
-
-        entity.setIdTMDB(mediaDTO.getIdTMDB());
-        entity.setTitle(mediaDTO.getTitle());
-        entity.setOverview(mediaDTO.getOverview());
-        entity.setRuntime(mediaDTO.getRuntime());
-        entity.setReleaseYear(mediaDTO.getReleaseYear());
-        entity.setAdult(mediaDTO.isAdult());
-
-        return entity;
-
-    }
 
     public Movie toMovieEntityPatch(MediaUpdateDTO dto) {
 
@@ -78,9 +54,6 @@ public class MediaMapper {
         Movie entity = new Movie();
 
         entity.setTitle(dto.getTitle());
-        entity.setBackdrop(dto.getBackdrop());
-        entity.setPoster(dto.getPoster());
-        entity.setLogo(dto.getLogo());
         entity.setOverview(dto.getOverview());
         entity.setTagline(dto.getTagline());
 
@@ -96,9 +69,6 @@ public class MediaMapper {
         TvShow entity = new TvShow();
 
         entity.setTitle(dto.getTitle());
-        entity.setBackdrop(dto.getBackdrop());
-        entity.setPoster(dto.getPoster());
-        entity.setLogo(dto.getLogo());
         entity.setOverview(dto.getOverview());
         entity.setTagline(dto.getTagline());
 

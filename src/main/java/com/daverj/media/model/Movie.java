@@ -14,4 +14,16 @@ import jakarta.persistence.Entity;
 @NoArgsConstructor
 @ToString
 @DiscriminatorValue("movie")
-public class Movie extends Media { }
+public class Movie extends Media {
+
+    public Movie(Media media) {
+        this.setTitle(media.getTitle());
+        this.setOverview(media.getOverview());
+        this.setTagline(media.getTagline());
+        this.setIdTMDB(media.getIdTMDB());
+        this.setReleaseYear(media.getReleaseYear());
+        this.setAdult(media.isAdult());
+        this.setRuntime(media.getRuntime());
+    }
+
+}

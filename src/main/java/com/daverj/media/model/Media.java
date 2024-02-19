@@ -36,12 +36,6 @@ public class Media {
 
     private String trailer;
 
-    private String poster;
-
-    private String logo;
-
-    private String backdrop;
-
     @Column(nullable = false)
     private String runtime;
 
@@ -57,16 +51,20 @@ public class Media {
     @CreationTimestamp
     private Instant createdAt;
 
+    // Implement on update media save the timestamp
     @CreationTimestamp
     private Instant updatedAt;
 
+    // Implement active or disable media without delete - OK
     private boolean isActive = true;
 
     @Column(nullable = false)
     private boolean isAdult;
 
+    // Implement rating for media
     private Integer rating;
 
+    // Implement create source folder when save media on disk
     private String sourceFolder;
 
     @OneToMany(mappedBy = "media")

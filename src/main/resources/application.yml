@@ -2,7 +2,7 @@ spring:
   application:
     name: media
   jpa:
-    show-sql: false
+    show-sql: true
     hibernate:
       ddl-auto: update
     properties:
@@ -11,9 +11,9 @@ spring:
   jmx:
     enable: false
   datasource:
-    url: ${DB_URL:jdbc:mysql://localhost:3306/astfx_media_db?allowPublicKeyRetrieval=true&sslMode=DISABLED}
-    username: ${DB_USER:root}
-    password: ${DB_PWD:1305}
+    url: ${DB_URL:jdbc:mysql://192.168.1.150:3306/astfx_media_db?allowPublicKeyRetrieval=true&sslMode=DISABLED}
+    username: ${DB_USER:dba-root}
+    password: ${DB_PWD:nUKXQ3C35F2Kcq4_}
 
 server:
   port: 8763
@@ -22,8 +22,8 @@ eureka:
   instance:
     preferIpAddress: true
   client:
-    registerWithEureka: true
-    fetchRegistry: true
+    registerWithEureka: false
+    fetchRegistry: false
     service-url:
       defaultZone: http://discovery-service:8761/eureka/
   server:

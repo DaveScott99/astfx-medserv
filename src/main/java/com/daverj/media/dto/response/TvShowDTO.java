@@ -29,7 +29,6 @@ public class TvShowDTO {
         id = tvShow.getId();
         title = tvShow.getTitle();
         trailer = tvShow.getTrailer();
-        logo = tvShow.getLogo();
         overview = tvShow.getOverview();
         releaseYear = tvShow.getReleaseYear();
         tvShow.getGenres().forEach(genre -> getGenres().add(new GenreDTO(genre)));

@@ -10,6 +10,7 @@ HELP.md
 /target/surefire-reports/
 /target/test-classes/
 /target/
+/resources/*.yml
 
 ### STS ###
 .apt_generated

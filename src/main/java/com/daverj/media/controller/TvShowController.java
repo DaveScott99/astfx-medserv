@@ -39,7 +39,7 @@ public class TvShowController {
     }
 
     @GetMapping
-    public ResponseEntity<TvShowDTO> findById(@RequestParam Long id) {
+    public ResponseEntity<MediaDTO> findById(@RequestParam Long id) {
         return ResponseEntity.ok(tvShowService.findById(id));
     }
 
