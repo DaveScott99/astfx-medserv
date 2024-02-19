@@ -6,6 +6,7 @@ import com.daverj.media.dto.response.MediaDTO;
 import com.daverj.media.dto.response.MediaMinDTO;
 import com.daverj.media.model.Genre;
 import com.daverj.media.service.MovieService;
+import com.daverj.media.utils.StandardMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,27 +56,23 @@ public class MovieController {
     }
 
     @PostMapping("/add/genre")
-    public ResponseEntity<Void> addGenre(@RequestParam Long mediaId, @RequestParam Long genreId) {
-        movieService.addGenre(mediaId, genreId);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<StandardMessage> addGenre(@RequestParam Long mediaId, @RequestParam Long genreId) {
+        return new ResponseEntity<>(movieService.addGenre(mediaId, genreId) ,HttpStatus.OK);
     }
 
     @DeleteMapping("/remove/genre")
-    public ResponseEntity<Void> removeGenre(@RequestParam Long mediaId, @RequestParam Long genreId) {
-        movieService.removeGenre(mediaId, genreId);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<StandardMessage> removeGenre(@RequestParam Long mediaId, @RequestParam Long genreId) {
+        return new ResponseEntity<>(movieService.removeGenre(mediaId, genreId),HttpStatus.OK);
     }
 
     @PatchMapping("/active")
-    public ResponseEntity<Void> active(@RequestParam Long id) {
-        movieService.active(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<StandardMessage> active(@RequestParam Long id) {
+        return new ResponseEntity<>(movieService.active(id), HttpStatus.OK);
     }
 
     @PatchMapping("/disable")
-    public ResponseEntity<Void> disable(@RequestParam Long id) {
-        movieService.disable(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<StandardMessage> disable(@RequestParam Long id) {
+        return new ResponseEntity<>(movieService.disable(id), HttpStatus.OK);
     }
 
 }
