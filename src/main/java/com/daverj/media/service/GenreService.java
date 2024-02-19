@@ -26,7 +26,13 @@ public class GenreService {
                 .stream()
                 .map(genreMapper::toDTO)
                 .collect(Collectors.toList());
+    }
 
+    public List<GenreDTO> findByMedia(String title) {
+        return genreRepository.findByMediaId(title)
+                .stream()
+                .map(genreMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     public GenreDTO create(Genre genre) {

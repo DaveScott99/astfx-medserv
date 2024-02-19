@@ -60,6 +60,12 @@ public class MovieController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping("/remove/genre")
+    public ResponseEntity<Void> removeGenre(@RequestParam Long mediaId, @RequestBody Genre genre) {
+        movieService.removeGenre(mediaId, genre);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @DeleteMapping
     public ResponseEntity<String> delete(@RequestParam Long id) {
         return ResponseEntity.ok(movieService.delete(id));

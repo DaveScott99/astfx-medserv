@@ -25,6 +25,12 @@ public class GenreController {
         return new ResponseEntity<>(genreService.list(), HttpStatus.OK);
     }
 
+
+    @GetMapping("/find/media")
+    public ResponseEntity<List<GenreDTO>> findByMedia(@RequestParam String title) {
+        return new ResponseEntity<>(genreService.findByMedia(title), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<GenreDTO> create(@RequestBody Genre genre) {
         return new ResponseEntity<>(genreService.create(genre), HttpStatus.CREATED);

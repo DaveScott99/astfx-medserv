@@ -101,4 +101,20 @@ public class MovieService {
         mediaMapper.toMovieDTO(movieRepository.save(entity));
     }
 
+    public void removeGenre(Long movieId, Genre genre) {
+
+        Movie entity = movieRepository.findById(movieId)
+                .orElseThrow(() -> new EntityNotFoundException("Movie not found"));
+
+        // Capturar exceção SQLIntegrityConstraintViolationException ao adicionar um genero repetido
+
+        if (!entity.getGenres().contains(genre))
+            throw new RuntimeException("This genre is already removed");
+
+        entity.getGenres().remove(genre);
+
+        movieRepository.save(entity);
+    }
+
+
 }
