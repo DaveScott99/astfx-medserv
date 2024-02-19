@@ -29,7 +29,7 @@ public class MovieController {
     private final MovieService movieService;
 
     @GetMapping("/all")
-    public ResponseEntity<Page<MediaDTO>> list(Pageable pageable) {
+    public ResponseEntity<Page<MediaMinDTO>> list(Pageable pageable) {
         return new ResponseEntity<>(movieService.list(pageable), HttpStatus.OK);
     }
 

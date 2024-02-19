@@ -24,10 +24,10 @@ public class MovieService {
     private final MovieRepository movieRepository;
     private final MediaMapper mediaMapper;
 
-    public Page<MediaDTO> list(Pageable pageable) {
+    public Page<MediaMinDTO> list(Pageable pageable) {
         log.info("Listing all movies");
         return movieRepository.findAll(pageable)
-                .map(mediaMapper::toDTO);
+                .map(mediaMapper::toMinDTO);
     }
 
     public MediaDTO findByTitle(String title) {
