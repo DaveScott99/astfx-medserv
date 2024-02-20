@@ -1,7 +1,6 @@
 package com.daverj.media.service;
 
 import com.daverj.media.dto.response.ArtDTO;
-import com.daverj.media.exceptions.StandardError;
 import com.daverj.media.model.Art;
 import com.daverj.media.repository.ArtRepository;
 import com.daverj.media.utils.StandardMessage;
@@ -9,13 +8,10 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 

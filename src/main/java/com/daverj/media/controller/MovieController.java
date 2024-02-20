@@ -7,6 +7,7 @@ import com.daverj.media.dto.response.MediaMinDTO;
 import com.daverj.media.model.Genre;
 import com.daverj.media.service.MovieService;
 import com.daverj.media.utils.StandardMessage;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class MovieController {
     }
 
     @PostMapping
-    public ResponseEntity<MediaMinDTO> create(@RequestBody MediaCreateDTO movie) {
+    public ResponseEntity<MediaMinDTO> create(@Valid @RequestBody MediaCreateDTO movie) {
         return new ResponseEntity<>(movieService.create(movie), HttpStatus.CREATED);
     }
 

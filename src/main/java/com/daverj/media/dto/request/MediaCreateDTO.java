@@ -4,13 +4,16 @@ import com.daverj.media.model.Genre;
 import com.daverj.media.model.Media;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 
-@JsonPropertyOrder(value = {"idTMDB", "title", "runtime", "overview", "tagline", "isAdult"})
+@JsonPropertyOrder(value = {"idTMDB", "title", "runtime", "overview", "tagline", "isAdult", "releaseYear"})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,7 +21,8 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class MediaCreateDTO {
 
-    @NotBlank(message = "The field 'idTMDB' is required")
+    @NotNull(message = "The field 'idTMDB' is required")
+    @Min(1)
     @JsonProperty(value = "idTMDB")
     private Long idTMDB;
 
@@ -38,11 +42,12 @@ public class MediaCreateDTO {
     @JsonProperty(value = "tagline")
     private String tagline;
 
-    @NotBlank(message = "The field 'releaseYear' is required")
+    @NotNull(message = "The field 'releaseYear' is required")
+    @Min(1)
     @JsonProperty(value = "releaseYear")
     private Integer releaseYear;
 
-    @NotBlank(message = "The field 'isAdult' is required")
+    @NotNull(message = "The field 'isAdult' is required")
     @JsonProperty(value = "isAdult")
     private boolean isAdult;
 
