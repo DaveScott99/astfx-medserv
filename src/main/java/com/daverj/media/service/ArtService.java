@@ -1,13 +1,18 @@
 package com.daverj.media.service;
 
 import com.daverj.media.dto.response.ArtDTO;
+import com.daverj.media.exceptions.StandardError;
 import com.daverj.media.model.Art;
 import com.daverj.media.repository.ArtRepository;
+import com.daverj.media.utils.StandardMessage;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -38,26 +43,29 @@ public class ArtService {
     }
 
     public ArtDTO create(Art art) {
-
-        // Verify if exists selected arts on media
-        String typeArt = art.getType();
-
-        Optional<Art> selectedMedia = artRepository.findByMediaId(art.getMedia().getId())
-                .stream()
-                .filter(item -> item.getType().contains(typeArt))
-                .filter(Art::isSelected)
-                .findFirst();
-
-        log.info("" + selectedMedia.get());
-
-        if (selectedMedia.get().isSelected() && art.isSelected()) {
-            log.error("Error creating art...");
-            throw new RuntimeException("Already exists selected " + typeArt);
-        }
-        else {
-            return new ArtDTO(artRepository.save(art));
-        }
-
+        return new ArtDTO(artRepository.save(art));
     }
+
+    @Transactional
+    public StandardMessage selectLogo(Long mediaId, Long logoId) {
+        artRepository.selectLogo(mediaId, logoId);
+
+        return new StandardMessage("success", "Logo selected");
+    }
+
+    @Transactional
+    public StandardMessage selectPoster(Long mediaId, Long posterId) {
+        artRepository.selectPoster(mediaId, posterId);
+
+        return new StandardMessage("success", "Poster selected");
+    }
+
+    @Transactional
+    public StandardMessage selectBackdrop(Long mediaId, Long backdropId) {
+        artRepository.selectBackdrop(mediaId, backdropId);
+
+        return new StandardMessage("success", "Backdrop selected");
+    }
+
 
 }
