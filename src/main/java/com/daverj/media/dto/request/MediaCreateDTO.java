@@ -30,9 +30,10 @@ public class MediaCreateDTO {
     @JsonProperty(value = "title")
     private String title;
 
-    @NotBlank(message = "The field 'runtime' is required")
+    @NotNull(message = "The field 'runtime' is required")
+    @Min(1)
     @JsonProperty(value = "runtime")
-    private String runtime;
+    private Integer runtime;
 
     @NotBlank(message = "The field 'overview' is required")
     @JsonProperty(value = "overview")

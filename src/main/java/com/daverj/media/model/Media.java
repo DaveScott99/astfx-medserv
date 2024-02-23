@@ -37,7 +37,7 @@ public class Media {
     private String trailer;
 
     @Column(nullable = false)
-    private String runtime;
+    private Integer runtime;
 
     @Column(nullable = false, length = 512)
     private String overview;

@@ -19,20 +19,29 @@ import java.util.Set;
 public class MediaDTO {
 
     private Long id;
-    private Long idTMBD;
+    private Long idTMDB;
     private String title;
     private Integer releaseYear;
+    private Integer runtime;
+    private String overview;
+    private String tagline;
     private List<GenreDTO> genres = new ArrayList<>();
     private boolean isActive;
+    private boolean isAdult;
     private ArtDTO poster;
     private ArtDTO backdrop;
+    private ArtDTO logo;
 
     public MediaDTO(Media media) {
         id = media.getId();
-        idTMBD = media.getIdTMDB();
+        idTMDB = media.getIdTMDB();
         title = media.getTitle();
         releaseYear = media.getReleaseYear();
+        runtime = media.getRuntime();
+        overview = media.getOverview();
+        tagline = media.getTagline();
         isActive = media.isActive();
+        isAdult = media.isAdult();
         media.getGenres().forEach(genre -> getGenres().add(new GenreDTO(genre)));
         poster = new ArtDTO(media.getLogos()
                 .stream().filter(art -> art.getType().contains("poster"))
@@ -42,5 +51,9 @@ public class MediaDTO {
                 .stream().filter(art -> art.getType().contains("backdrop"))
                 .filter(Art::isSelected)
                 .findFirst().orElseGet(() -> new Art("Standard backdrop", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019", "backdrop")));
+        logo = new ArtDTO(media.getBackdrops()
+                .stream().filter(art -> art.getType().contains("logo"))
+                .filter(Art::isSelected)
+                .findFirst().orElseGet(() -> new Art("Standard logo", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019", "logo")));
     }
 }
