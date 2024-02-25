@@ -45,6 +45,20 @@ public class ArtService {
                 .collect(Collectors.toList());
     }
 
+    public List<ArtDTO> findPostersByMedia(Long mediaId) {
+        return artRepository.findPostersByMedia(mediaId)
+                .stream()
+                .map(ArtDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<ArtDTO> findLogosByMedia(Long mediaId) {
+        return artRepository.findLogosByMedia(mediaId)
+                .stream()
+                .map(ArtDTO::new)
+                .collect(Collectors.toList());
+    }
+
     public void createPoster(Long idMedia, String titleMedia, Long idMediaTmdb, String filePath, String type) {
         Random rand = new Random();
         Optional<ArtDTO> existsArt = artRepository.findAll()

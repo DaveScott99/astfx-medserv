@@ -33,6 +33,16 @@ public class ArtController {
         return new ResponseEntity<>(artService.findBackdropsByMedia(mediaId), HttpStatus.OK);
     }
 
+    @GetMapping("/find/poster")
+    public ResponseEntity<List<ArtDTO>> findPostersByMedia(@RequestParam Long mediaId) {
+        return new ResponseEntity<>(artService.findPostersByMedia(mediaId), HttpStatus.OK);
+    }
+
+    @GetMapping("/find/logo")
+    public ResponseEntity<List<ArtDTO>> findLogosByMedia(@RequestParam Long mediaId) {
+        return new ResponseEntity<>(artService.findLogosByMedia(mediaId), HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Void> createPoster(@RequestParam Long idMedia, @RequestParam String titleMedia, @RequestParam Long idMediaTmdb, @RequestParam String filePath, @RequestParam String type) {
         artService.createPoster(idMedia, titleMedia, idMediaTmdb, filePath, type);
