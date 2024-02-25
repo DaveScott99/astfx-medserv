@@ -1,6 +1,5 @@
 package com.daverj.media.dto.response;
 
-import com.daverj.media.ImageRecord;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,10 +11,10 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @ToString
-public class ImagesTmdbDTO {
+public class ListsImageTmdbDTO {
 
-    private List<ImageRecord> backdrops;
-    private List<ImageRecord> logos;
-    private List<ImageRecord> posters;
+    private List<ImageTmdbDTO> backdrops;
+    private List<ImageTmdbDTO> logos;
+    private List<ImageTmdbDTO> posters;
 
 }

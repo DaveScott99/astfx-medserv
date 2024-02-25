@@ -50,10 +50,10 @@ public class MediaDTO {
         backdrop = new ArtDTO(media.getBackdrops()
                 .stream().filter(art -> art.getType().contains("backdrop"))
                 .filter(Art::isSelected)
-                .findFirst().orElseGet(() -> new Art("Standard backdrop", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019", "backdrop")));
+                .findFirst().orElseGet(() -> new Art("Standard backdrop", "https://placehold.co/1920x1080?text=Empty+Backdrop&font=roboto", "backdrop")));
         logo = new ArtDTO(media.getBackdrops()
                 .stream().filter(art -> art.getType().contains("logo"))
                 .filter(Art::isSelected)
-                .findFirst().orElseGet(() -> new Art("Standard logo", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019", "logo")));
+                .findFirst().orElseGet(() -> new Art("Standard logo", "https://placehold.co/400x250?text=Empty+Logo&font=roboto", "logo")));
     }
 }

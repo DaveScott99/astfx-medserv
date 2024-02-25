@@ -10,13 +10,15 @@ import lombok.*;
 public class ArtDTO {
     private Long id;
     private String name;
-    private String file;
+    private String filePath;
     private String type;
+    private Double aspectRatio;
 
     public ArtDTO(Art entity) {
         id = entity.getId();
         name = entity.getName();
-        file = entity.getFile();
+        filePath = entity.getFilePath();
         type = entity.getType();
+        aspectRatio = entity.getAspectRatio();
     }
 }

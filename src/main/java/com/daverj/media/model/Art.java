@@ -18,13 +18,16 @@ public class Art {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String file;
+    private String filePath;
     private String type;
+    private Double aspectRatio;
+    private Integer height;
+    private Integer width;
 
     @CreationTimestamp
     private Instant createdAt;
 
-    private boolean isSelected;
+    private boolean isSelected = false;
 
     @ManyToOne
     @JoinColumn(name = "media_id", nullable = false)
@@ -32,7 +35,17 @@ public class Art {
 
     public Art(String name, String file, String type) {
         this.name = name;
-        this.file = file;
+        this.filePath = file;
         this.type = type;
+    }
+
+    public Art(String name, String filePath, String type, Double aspectRatio, Integer height, Integer width, Media media) {
+        this.name = name;
+        this.filePath = filePath;
+        this.type = type;
+        this.aspectRatio = aspectRatio;
+        this.height = height;
+        this.width = width;
+        this.media = media;
     }
 }
