@@ -49,19 +49,9 @@ public class ArtController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PostMapping("/select/logo")
-    public ResponseEntity<StandardMessage> selectLogo(@RequestParam Long mediaId, @RequestParam Long logoId) {
-        return new ResponseEntity<>(artService.selectLogo(mediaId, logoId), HttpStatus.OK);
-    }
-
-    @PostMapping("/select/poster")
-    public ResponseEntity<StandardMessage> selectPoster(@RequestParam Long mediaId, @RequestParam Long posterId) {
-        return new ResponseEntity<>(artService.selectPoster(mediaId, posterId), HttpStatus.OK);
-    }
-
-    @PostMapping("/select/backdrop")
-    public ResponseEntity<StandardMessage> selectBackdrop(@RequestParam Long mediaId, @RequestParam Long backdropId) {
-        return new ResponseEntity<>(artService.selectBackdrop(mediaId, backdropId), HttpStatus.OK);
+    @PostMapping("/select/image")
+    public ResponseEntity<StandardMessage> selectImage(@RequestParam Long mediaId, @RequestParam Long imageId, @RequestParam String type) {
+        return new ResponseEntity<>(artService.selectImage(mediaId, imageId,  type), HttpStatus.OK);
     }
 
 }

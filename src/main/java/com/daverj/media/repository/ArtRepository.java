@@ -24,16 +24,8 @@ public interface ArtRepository extends JpaRepository<Art, Long> {
     @Query(value = "CALL findLogosByMedia(:mediaId)", nativeQuery = true)
     List<Art> findLogosByMedia(Long mediaId);
 
-    @Query(value = "CALL select_logo(:mediaId, :logoId) ", nativeQuery = true)
+    @Query(value = "CALL select_image(:mediaId, :imageId, :type) ", nativeQuery = true)
     @Modifying(clearAutomatically = true, flushAutomatically = true)
-    int selectLogo(Long mediaId, Long logoId);
-
-    @Query(value = "CALL select_poster(:mediaId, :posterId) ", nativeQuery = true)
-    @Modifying(clearAutomatically = true, flushAutomatically = true)
-    int selectPoster(Long mediaId, Long posterId);
-
-    @Query(value = "CALL select_backdrop(:mediaId, :backdropId) ", nativeQuery = true)
-    @Modifying(clearAutomatically = true, flushAutomatically = true)
-    int selectBackdrop(Long mediaId, Long backdropId);
+    int selectImage(Long mediaId, Long imageId, String type);
 
 }

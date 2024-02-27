@@ -146,25 +146,9 @@ public class ArtService {
     }
 
     @Transactional
-    public StandardMessage selectLogo(Long mediaId, Long logoId) {
-        artRepository.selectLogo(mediaId, logoId);
-
-        return new StandardMessage("success", "Logo selected");
+    public StandardMessage selectImage(Long mediaId, Long imageId, String type) {
+        artRepository.selectImage(mediaId, imageId, type);
+        return new StandardMessage("success", "Image selected");
     }
-
-    @Transactional
-    public StandardMessage selectPoster(Long mediaId, Long posterId) {
-        artRepository.selectPoster(mediaId, posterId);
-
-        return new StandardMessage("success", "Poster selected");
-    }
-
-    @Transactional
-    public StandardMessage selectBackdrop(Long mediaId, Long backdropId) {
-        artRepository.selectBackdrop(mediaId, backdropId);
-
-        return new StandardMessage("success", "Backdrop selected");
-    }
-
 
 }
