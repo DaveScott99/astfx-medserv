@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
@@ -69,15 +68,15 @@ public class Media {
 
     @OneToMany(mappedBy = "media")
     @JsonIgnore
-    private Set<Art> posters = new HashSet<>();
+    private Set<Image> posters = new HashSet<>();
 
     @OneToMany(mappedBy = "media")
     @JsonIgnore
-    private Set<Art> logos = new HashSet<>();
+    private Set<Image> logos = new HashSet<>();
 
     @OneToMany(mappedBy = "media")
     @JsonIgnore
-    private Set<Art> backdrops = new HashSet<>();
+    private Set<Image> backdrops = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "media_genre",

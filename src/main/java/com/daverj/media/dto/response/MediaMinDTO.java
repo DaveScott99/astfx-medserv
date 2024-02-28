@@ -1,12 +1,8 @@
 package com.daverj.media.dto.response;
 
-import com.daverj.media.model.Art;
+import com.daverj.media.model.Image;
 import com.daverj.media.model.Media;
-import com.daverj.media.model.Movie;
-import com.daverj.media.model.TvShow;
 import lombok.*;
-
-import java.time.Instant;
 
 @Getter
 @Setter
@@ -19,17 +15,17 @@ public class MediaMinDTO {
     private String title;
     private Integer releaseYear;
     private boolean isActive;
-    private ArtDTO poster;
+    private ImageDTO poster;
 
     public MediaMinDTO(Media media) {
         id = media.getId();
         title = media.getTitle();
         releaseYear = media.getReleaseYear();
         isActive = media.isActive();
-        poster = new ArtDTO(media.getLogos()
+        poster = new ImageDTO(media.getLogos()
                 .stream().filter(art -> art.getType().contains("poster"))
-                .filter(Art::isSelected)
-                .findFirst().orElseGet(() -> new Art("Standard logo", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019", "poster")));
+                .filter(Image::isSelected)
+                .findFirst().orElseGet(() -> new Image("Standard logo", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019", "poster")));
     }
 
 }

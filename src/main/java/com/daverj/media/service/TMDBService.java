@@ -2,8 +2,6 @@ package com.daverj.media.service;
 
 import com.daverj.media.dto.response.ImageTmdbDTO;
 import com.daverj.media.dto.response.ListsImageTmdbDTO;
-import com.daverj.media.model.Art;
-import com.daverj.media.model.Media;
 import com.daverj.media.utils.UtilMethods;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

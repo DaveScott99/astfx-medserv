@@ -1,15 +1,11 @@
 package com.daverj.media.dto.response;
 
-import com.daverj.media.model.Art;
+import com.daverj.media.model.Image;
 import com.daverj.media.model.Media;
-import com.daverj.media.model.Movie;
-import com.daverj.media.model.TvShow;
 import lombok.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -28,9 +24,9 @@ public class MediaDTO {
     private List<GenreDTO> genres = new ArrayList<>();
     private boolean isActive;
     private boolean isAdult;
-    private ArtDTO poster;
-    private ArtDTO backdrop;
-    private ArtDTO logo;
+    private ImageDTO poster;
+    private ImageDTO backdrop;
+    private ImageDTO logo;
 
     public MediaDTO(Media media) {
         id = media.getId();
@@ -43,17 +39,17 @@ public class MediaDTO {
         isActive = media.isActive();
         isAdult = media.isAdult();
         media.getGenres().forEach(genre -> getGenres().add(new GenreDTO(genre)));
-        poster = new ArtDTO(media.getLogos()
+        poster = new ImageDTO(media.getLogos()
                 .stream().filter(art -> art.getType().contains("poster"))
-                .filter(Art::isSelected)
-                .findFirst().orElseGet(() -> new Art("Standard logo", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019", "poster")));
-        backdrop = new ArtDTO(media.getBackdrops()
+                .filter(Image::isSelected)
+                .findFirst().orElseGet(() -> new Image("Standard logo", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019", "poster")));
+        backdrop = new ImageDTO(media.getBackdrops()
                 .stream().filter(art -> art.getType().contains("backdrop"))
-                .filter(Art::isSelected)
-                .findFirst().orElseGet(() -> new Art("Standard backdrop", "https://placehold.co/1920x1080?text=Empty+Backdrop&font=roboto", "backdrop")));
-        logo = new ArtDTO(media.getBackdrops()
+                .filter(Image::isSelected)
+                .findFirst().orElseGet(() -> new Image("Standard backdrop", "https://placehold.co/1920x1080?text=Empty+Backdrop&font=roboto", "backdrop")));
+        logo = new ImageDTO(media.getBackdrops()
                 .stream().filter(art -> art.getType().contains("logo"))
-                .filter(Art::isSelected)
-                .findFirst().orElseGet(() -> new Art("Standard logo", "https://placehold.co/400x250?text=Empty+Logo&font=roboto", "logo")));
+                .filter(Image::isSelected)
+                .findFirst().orElseGet(() -> new Image("Standard logo", "https://placehold.co/400x250?text=Empty+Logo&font=roboto", "logo")));
     }
 }

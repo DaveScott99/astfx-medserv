@@ -12,7 +12,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Art {
+public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,13 +33,13 @@ public class Art {
     @JoinColumn(name = "media_id", nullable = false)
     private Media media;
 
-    public Art(String name, String file, String type) {
+    public Image(String name, String file, String type) {
         this.name = name;
         this.filePath = file;
         this.type = type;
     }
 
-    public Art(String name, String filePath, String type, Double aspectRatio, Integer height, Integer width, Media media) {
+    public Image(String name, String filePath, String type, Double aspectRatio, Integer height, Integer width, Media media) {
         this.name = name;
         this.filePath = filePath;
         this.type = type;

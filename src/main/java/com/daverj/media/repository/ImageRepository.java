@@ -1,7 +1,6 @@
 package com.daverj.media.repository;
 
-import com.daverj.media.dto.response.ArtDTO;
-import com.daverj.media.model.Art;
+import com.daverj.media.model.Image;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,18 +10,18 @@ import java.util.List;
 import java.util.Set;
 
 @Repository
-public interface ArtRepository extends JpaRepository<Art, Long> {
+public interface ImageRepository extends JpaRepository<Image, Long> {
 
-    Set<Art> findByMediaId(Long id);
+    Set<Image> findByMediaId(Long id);
 
     @Query(value = "CALL findBackdropsByMedia(:mediaId)", nativeQuery = true)
-    List<Art> findBackdropsByMedia(Long mediaId);
+    List<Image> findBackdropsByMedia(Long mediaId);
 
     @Query(value = "CALL findPostersByMedia(:mediaId)", nativeQuery = true)
-    List<Art> findPostersByMedia(Long mediaId);
+    List<Image> findPostersByMedia(Long mediaId);
 
     @Query(value = "CALL findLogosByMedia(:mediaId)", nativeQuery = true)
-    List<Art> findLogosByMedia(Long mediaId);
+    List<Image> findLogosByMedia(Long mediaId);
 
     @Query(value = "CALL select_image(:mediaId, :imageId, :type) ", nativeQuery = true)
     @Modifying(clearAutomatically = true, flushAutomatically = true)

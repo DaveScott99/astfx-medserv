@@ -1,8 +1,7 @@
 package com.daverj.media.controller;
 
-import com.daverj.media.dto.response.ArtDTO;
-import com.daverj.media.model.Art;
-import com.daverj.media.service.ArtService;
+import com.daverj.media.dto.response.ImageDTO;
+import com.daverj.media.service.ImageService;
 import com.daverj.media.utils.StandardMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,42 +15,42 @@ import java.util.Map;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/media/art")
+@RequestMapping("/media/image")
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class ArtController {
+public class ImageController {
 
-    private final ArtService artService;
+    private final ImageService imageService;
 
     @GetMapping
-    public ResponseEntity<Map<String, Set<ArtDTO>>> findAllByMedia(@RequestParam Long id) {
-        return new ResponseEntity<>(artService.findAllByMedia(id), HttpStatus.OK);
+    public ResponseEntity<Map<String, Set<ImageDTO>>> findAllByMedia(@RequestParam Long id) {
+        return new ResponseEntity<>(imageService.findAllByMedia(id), HttpStatus.OK);
     }
 
     @GetMapping("/find/backdrop")
-    public ResponseEntity<List<ArtDTO>> findBackdropsByMedia(@RequestParam Long mediaId) {
-        return new ResponseEntity<>(artService.findBackdropsByMedia(mediaId), HttpStatus.OK);
+    public ResponseEntity<List<ImageDTO>> findBackdropsByMedia(@RequestParam Long mediaId) {
+        return new ResponseEntity<>(imageService.findBackdropsByMedia(mediaId), HttpStatus.OK);
     }
 
     @GetMapping("/find/poster")
-    public ResponseEntity<List<ArtDTO>> findPostersByMedia(@RequestParam Long mediaId) {
-        return new ResponseEntity<>(artService.findPostersByMedia(mediaId), HttpStatus.OK);
+    public ResponseEntity<List<ImageDTO>> findPostersByMedia(@RequestParam Long mediaId) {
+        return new ResponseEntity<>(imageService.findPostersByMedia(mediaId), HttpStatus.OK);
     }
 
     @GetMapping("/find/logo")
-    public ResponseEntity<List<ArtDTO>> findLogosByMedia(@RequestParam Long mediaId) {
-        return new ResponseEntity<>(artService.findLogosByMedia(mediaId), HttpStatus.OK);
+    public ResponseEntity<List<ImageDTO>> findLogosByMedia(@RequestParam Long mediaId) {
+        return new ResponseEntity<>(imageService.findLogosByMedia(mediaId), HttpStatus.OK);
     }
 
     @PostMapping("/create")
     public ResponseEntity<Void> createPoster(@RequestParam Long idMedia, @RequestParam String titleMedia, @RequestParam Long idMediaTmdb, @RequestParam String filePath, @RequestParam String type) {
-        artService.createPoster(idMedia, titleMedia, idMediaTmdb, filePath, type);
+        imageService.createPoster(idMedia, titleMedia, idMediaTmdb, filePath, type);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/select/image")
     public ResponseEntity<StandardMessage> selectImage(@RequestParam Long mediaId, @RequestParam Long imageId, @RequestParam String type) {
-        return new ResponseEntity<>(artService.selectImage(mediaId, imageId,  type), HttpStatus.OK);
+        return new ResponseEntity<>(imageService.selectImage(mediaId, imageId,  type), HttpStatus.OK);
     }
 
 }

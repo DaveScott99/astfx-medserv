@@ -1,11 +1,11 @@
 package com.daverj.media.service;
 
-import com.daverj.media.dto.response.ArtDTO;
+import com.daverj.media.dto.response.ImageDTO;
 import com.daverj.media.dto.response.ImageTmdbDTO;
 import com.daverj.media.exceptions.DuplicateEntityException;
-import com.daverj.media.model.Art;
+import com.daverj.media.model.Image;
 import com.daverj.media.model.Media;
-import com.daverj.media.repository.ArtRepository;
+import com.daverj.media.repository.ImageRepository;
 import com.daverj.media.utils.StandardMessage;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -19,17 +19,17 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class ArtService {
+public class ImageService {
 
-    private final ArtRepository artRepository;
+    private final ImageRepository imageRepository;
     private final TMDBService tmdbService;
 
-    public Map<String, Set<ArtDTO>> findAllByMedia(Long id) {
-        Set<ArtDTO> arts = artRepository.findByMediaId(id)
-                .stream().map(art -> new ArtDTO(art))
+    public Map<String, Set<ImageDTO>> findAllByMedia(Long id) {
+        Set<ImageDTO> arts = imageRepository.findByMediaId(id)
+                .stream().map(art -> new ImageDTO(art))
                 .collect(Collectors.toSet());
 
-        Map<String, Set<ArtDTO>> artsMap = new HashMap<>();
+        Map<String, Set<ImageDTO>> artsMap = new HashMap<>();
 
         artsMap.put("logo", arts.stream().filter(art -> art.getType().contains("logo")).collect(Collectors.toSet()));
         artsMap.put("poster", arts.stream().filter(art -> art.getType().contains("poster")).collect(Collectors.toSet()));
@@ -38,33 +38,33 @@ public class ArtService {
         return artsMap;
     }
 
-    public List<ArtDTO> findBackdropsByMedia(Long mediaId) {
-        return artRepository.findBackdropsByMedia(mediaId)
+    public List<ImageDTO> findBackdropsByMedia(Long mediaId) {
+        return imageRepository.findBackdropsByMedia(mediaId)
                 .stream()
-                .map(ArtDTO::new)
+                .map(ImageDTO::new)
                 .collect(Collectors.toList());
     }
 
-    public List<ArtDTO> findPostersByMedia(Long mediaId) {
-        return artRepository.findPostersByMedia(mediaId)
+    public List<ImageDTO> findPostersByMedia(Long mediaId) {
+        return imageRepository.findPostersByMedia(mediaId)
                 .stream()
-                .map(ArtDTO::new)
+                .map(ImageDTO::new)
                 .collect(Collectors.toList());
     }
 
-    public List<ArtDTO> findLogosByMedia(Long mediaId) {
-        return artRepository.findLogosByMedia(mediaId)
+    public List<ImageDTO> findLogosByMedia(Long mediaId) {
+        return imageRepository.findLogosByMedia(mediaId)
                 .stream()
-                .map(ArtDTO::new)
+                .map(ImageDTO::new)
                 .collect(Collectors.toList());
     }
 
     public void createPoster(Long idMedia, String titleMedia, Long idMediaTmdb, String filePath, String type) {
         Random rand = new Random();
-        Optional<ArtDTO> existsArt = artRepository.findAll()
+        Optional<ImageDTO> existsArt = imageRepository.findAll()
                 .stream()
                 .filter(art -> art.getFilePath().contains(filePath))
-                .map(ArtDTO::new)
+                .map(ImageDTO::new)
                 .findFirst();
 
         if (existsArt.isPresent()) {
@@ -80,7 +80,7 @@ public class ArtService {
                 Media media = new Media();
                 media.setId(idMedia);
                 media.setTitle(titleMedia);
-                Art poster = new Art(
+                Image poster = new Image(
                         titleMedia.toLowerCase().replace(" ", "-")+"-"+type+"-"+rand.nextInt(1000000),
                         "https://image.tmdb.org/t/p/w300" + posterFromTmdb.get().getFile_path(),
                         type,
@@ -90,7 +90,7 @@ public class ArtService {
                         media
                 );
 
-                new ArtDTO(artRepository.save(poster));
+                new ImageDTO(imageRepository.save(poster));
             }
 
         }
@@ -104,7 +104,7 @@ public class ArtService {
                 Media media = new Media();
                 media.setId(idMedia);
                 media.setTitle(titleMedia);
-                Art poster = new Art(
+                Image poster = new Image(
                         titleMedia.toLowerCase().replace(" ", "-")+"-"+type+"-"+rand.nextInt(1000000),
                         "https://image.tmdb.org/t/p/original" + backdropFromTmdb.get().getFile_path(),
                         type,
@@ -114,7 +114,7 @@ public class ArtService {
                         media
                 );
 
-                new ArtDTO(artRepository.save(poster));
+                new ImageDTO(imageRepository.save(poster));
             }
 
         }
@@ -128,7 +128,7 @@ public class ArtService {
                 Media media = new Media();
                 media.setId(idMedia);
                 media.setTitle(titleMedia);
-                Art poster = new Art(
+                Image poster = new Image(
                         titleMedia.toLowerCase().replace(" ", "-")+"-"+type+"-"+rand.nextInt(1000000),
                         "https://image.tmdb.org/t/p/original" + logoFromTmdb.get().getFile_path(),
                         type,
@@ -138,7 +138,7 @@ public class ArtService {
                         media
                 );
 
-                new ArtDTO(artRepository.save(poster));
+                new ImageDTO(imageRepository.save(poster));
             }
 
         }
@@ -147,7 +147,7 @@ public class ArtService {
 
     @Transactional
     public StandardMessage selectImage(Long mediaId, Long imageId, String type) {
-        artRepository.selectImage(mediaId, imageId, type);
+        imageRepository.selectImage(mediaId, imageId, type);
         return new StandardMessage("success", "Image selected");
     }
 
