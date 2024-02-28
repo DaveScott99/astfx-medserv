@@ -42,7 +42,7 @@ public class MediaDTO {
         poster = new ImageDTO(media.getLogos()
                 .stream().filter(art -> art.getType().contains("poster"))
                 .filter(Image::isSelected)
-                .findFirst().orElseGet(() -> new Image("Standard logo", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019", "poster")));
+                .findFirst().orElseGet(() -> new Image("Standard logo", "https://placehold.co/300x450?text=Empty+Poster&font=roboto", "poster")));
         backdrop = new ImageDTO(media.getBackdrops()
                 .stream().filter(art -> art.getType().contains("backdrop"))
                 .filter(Image::isSelected)

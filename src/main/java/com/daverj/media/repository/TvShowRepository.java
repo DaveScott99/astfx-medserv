@@ -8,5 +8,4 @@ import java.util.Optional;
 
 @Repository
 public interface TvShowRepository extends JpaRepository<TvShow, Long> {
-    Optional<TvShow> findByTitle(String title);
 }

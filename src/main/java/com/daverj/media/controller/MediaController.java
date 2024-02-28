@@ -33,6 +33,11 @@ public class MediaController {
         return new ResponseEntity<>(mediaService.findAll(pageable), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/movies", produces = "application/json")
+    public ResponseEntity<Page<MediaMinDTO>> findAllMovies(@PageableDefault(size = 10) Pageable pageable) {
+        return new ResponseEntity<>(mediaService.findAllMovies(pageable), HttpStatus.OK);
+    }
+
     @GetMapping(value = "/{title}", produces = "application/json")
     public ResponseEntity<MediaDTO> findByTitle(@PathVariable String title) {
         String titleDecoded = URLDecoder.decode(title, StandardCharsets.UTF_8);
@@ -40,8 +45,13 @@ public class MediaController {
     }
 
     @PostMapping("/create/movie")
-    public ResponseEntity<MediaMinDTO> create(@Valid @RequestBody MediaCreateDTO movie) {
+    public ResponseEntity<MediaMinDTO> createMovie(@Valid @RequestBody MediaCreateDTO movie) {
         return new ResponseEntity<>(mediaService.createMovie(movie), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/create/tv-show")
+    public ResponseEntity<MediaMinDTO> createTvShow(@Valid @RequestBody MediaCreateDTO tvShow) {
+        return new ResponseEntity<>(mediaService.createTvShow(tvShow), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{mediaId}")

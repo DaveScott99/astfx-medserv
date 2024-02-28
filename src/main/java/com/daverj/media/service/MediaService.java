@@ -7,9 +7,12 @@ import com.daverj.media.dto.response.MediaDTO;
 import com.daverj.media.dto.response.MediaMinDTO;
 import com.daverj.media.model.Media;
 import com.daverj.media.model.Movie;
+import com.daverj.media.model.TvShow;
 import com.daverj.media.repository.MediaRepository;
 import com.daverj.media.repository.MovieRepository;
+import com.daverj.media.repository.TvShowRepository;
 import com.daverj.media.utils.StandardMessage;
+import com.daverj.media.utils.UtilMethods;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +23,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -27,11 +33,21 @@ public class MediaService {
 
     private final MediaRepository mediaRepository;
     private final MovieRepository movieRepository;
+    private final TvShowRepository tvShowRepository;
     private final MediaMapper mediaMapper;
+    private final UtilMethods utilMethods;
 
     public Page<MediaMinDTO> findAll(Pageable pageable) {
         return mediaRepository.findAll(pageable)
                 .map(mediaMapper::toMinDTO);
+    }
+
+    public Page<MediaMinDTO> findAllMovies(Pageable pageable) {
+        return utilMethods.convertListToPagination(pageable,
+                mediaRepository.findAllMovies()
+                    .stream()
+                    .map(mediaMapper::toMinDTO)
+                    .collect(Collectors.toList()));
     }
 
     public MediaDTO findByTitle(String title) {
@@ -43,6 +59,11 @@ public class MediaService {
     public MediaMinDTO createMovie(MediaCreateDTO movieCreate) {
         Movie movie = new Movie(mediaMapper.toEntity(movieCreate));
         return mediaMapper.toMinDTO(movieRepository.save(movie));
+    }
+
+    public MediaMinDTO createTvShow(MediaCreateDTO tvShowCreate) {
+        TvShow tvShow = new TvShow(mediaMapper.toEntity(tvShowCreate));
+        return mediaMapper.toMinDTO(tvShowRepository.save(tvShow));
     }
 
     public MediaUpdateDTO update(Long id, MediaUpdateDTO mediaDTO) {
@@ -68,14 +89,14 @@ public class MediaService {
     public StandardMessage active(Long id) {
         int responseDB = mediaRepository.active(id);
         log.info("Response DB: " + responseDB);
-        return new StandardMessage("success", "Movie activated");
+        return new StandardMessage("success", "Media activated");
     }
 
     @Transactional
     public StandardMessage disable(Long id) {
         int responseDB = mediaRepository.disable(id);
         log.info("Response DB: " + responseDB);
-        return new StandardMessage("success", "Movie disabled");
+        return new StandardMessage("success", "Media disabled");
     }
 
     @Transactional
